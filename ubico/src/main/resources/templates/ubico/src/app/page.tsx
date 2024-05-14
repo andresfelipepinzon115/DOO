@@ -1,4 +1,5 @@
-import {home} from "@/components/component/home";
- export default function Home() {
-   return home();
- }
+import { HomeComponent } from "@/components/component/home"; // Importar con el nuevo nombre
+
+export default function Home() {
+  return <HomeComponent />;
+}
