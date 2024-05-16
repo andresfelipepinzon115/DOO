@@ -1,6 +1,6 @@
-package co.edu.uco.tiendachepito.crosscutting.helpers;
+package co.edu.uco.tiendachepito.crosscutting.crosscutting.helpers;
 
-import static co.edu.uco.tiendachepito.crosscutting.helpers.ObjectHelper.getObjectHelper;
+import static co.edu.uco.tiendachepito.crosscutting.crosscutting.helpers.ObjectHelper.getObjectHelper;
 
 public final class TextHelper {
 
@@ -34,7 +34,7 @@ public final class TextHelper {
 	public static final String concatenate(final String... strings) {
 		final var sb = new StringBuilder(EMPTY);
 
-		if (!ObjectHelper.getObjectHelper().isNull(strings)) {
+		if (!getObjectHelper().isNull(strings)) {
 			for (final var string : strings) {
 				sb.append(applyTrim(string));
 			}

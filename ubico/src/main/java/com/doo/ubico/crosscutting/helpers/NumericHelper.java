@@ -1,4 +1,4 @@
-package co.edu.uco.tiendachepito.crosscutting.helpers;
+package co.edu.uco.tiendachepito.crosscutting.crosscutting.helpers;
 
 public final class NumericHelper {
 	
