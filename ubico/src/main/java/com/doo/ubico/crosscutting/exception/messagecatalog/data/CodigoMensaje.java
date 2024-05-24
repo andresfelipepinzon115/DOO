@@ -1,8 +1,9 @@
-package co.edu.uco.tiendachepito.crosscutting.crosscutting.exception.messagecatalog.data;
+package com.doo.ubico.crosscutting.exception.messagecatalog.data;
 
 
-import static co.edu.uco.tiendachepito.crosscutting.crosscutting.helpers.TextHelper.UNDERLINE;
-import static co.edu.uco.tiendachepito.crosscutting.crosscutting.helpers.TextHelper.concatenate;
+import static com.doo.ubico.crosscutting.helpers.TextHelper.UNDERLINE;
+import static com.doo.ubico.crosscutting.helpers.TextHelper.concatenate;
+
 
 public enum CodigoMensaje {
 

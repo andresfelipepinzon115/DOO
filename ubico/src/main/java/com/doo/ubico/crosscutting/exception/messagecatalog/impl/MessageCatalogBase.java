@@ -1,13 +1,12 @@
-package co.edu.uco.tiendachepito.crosscutting.crosscutting.exception.messagecatalog.impl;
+package com.doo.ubico.crosscutting.exception.messagecatalog.impl;
 
 
-import co.edu.uco.tiendachepito.crosscutting.crosscutting.exception.custom.CrosscuttingTiendaChepitoException;
-import co.edu.uco.tiendachepito.crosscutting.crosscutting.exception.messagecatalog.MessageCatalog;
-import co.edu.uco.tiendachepito.crosscutting.crosscutting.exception.messagecatalog.data.CategoriaMensaje;
-import co.edu.uco.tiendachepito.crosscutting.crosscutting.exception.messagecatalog.data.CodigoMensaje;
-import co.edu.uco.tiendachepito.crosscutting.crosscutting.exception.messagecatalog.data.Mensaje;
-import co.edu.uco.tiendachepito.crosscutting.crosscutting.exception.messagecatalog.data.TipoMensaje;
-import co.edu.uco.tiendachepito.crosscutting.crosscutting.helpers.ObjectHelper;
+import com.doo.ubico.crosscutting.exception.UbicoException;
+import com.doo.ubico.crosscutting.exception.custom.CrosscuttingUbicoException;
+import com.doo.ubico.crosscutting.exception.messagecatalog.MessageCatalog;
+import com.doo.ubico.crosscutting.exception.messagecatalog.data.CodigoMensaje;
+import com.doo.ubico.crosscutting.exception.messagecatalog.data.Mensaje;
+import com.doo.ubico.crosscutting.helpers.ObjectHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -76,24 +75,21 @@ public final class MessageCatalogBase implements MessageCatalog {
 		if (ObjectHelper.getObjectHelper().isNull(codigo)) {
 			var mensajeUsuario = obtenerContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00001);
-			throw new CrosscuttingTiendaChepitoException(mensajeTecnico, mensajeUsuario);
+			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
 		}
 
 		if (!codigo.isBase()) {
 			var mensajeUsuario = obtenerContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00004, codigo.getIdentificador());
-			throw new CrosscuttingTiendaChepitoException(mensajeTecnico, mensajeUsuario);
+			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
 		}
 
 		if (!mensajes.containsKey(codigo.getIdentificador())) {
 			var mensajeUsuario = obtenerContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00003, codigo.getIdentificador());
-			throw new CrosscuttingTiendaChepitoException(mensajeTecnico, mensajeUsuario);
+			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
 		}
 
-		// TODO: Tarea: asegure que si tiene parámetros, el contenido
-		// del mensaje se retorne con los parámetros reemplazados
-		// {1}, {2}, {3}
 
 		return mensajes.get(codigo.getIdentificador());
 	}
