@@ -26,11 +26,15 @@ public final  class AulaEntity {
     }
     }
 
+    public static final AulaEntity build(final int id, final String nombre, final String bloque, final String tipoAula){
+        return new AulaEntity(id, nombre, BloqueEntity.build(bloque), TipoAulaEntity.build(tipoAula));
+    }
+
     public static final AulaEntity build(final int id){
         return new AulaEntity(id);
     }
 
-    public static final AulaEntity build(final int id, final String nombre, final AulaEntity departamentoEntity, final TipoAulaEntity tipoAula){
+    public static final AulaEntity build(final int id, final String nombre, final AulaEntity bloque, final TipoAulaEntity tipoAula){
         return new AulaEntity(id);
     }
 
