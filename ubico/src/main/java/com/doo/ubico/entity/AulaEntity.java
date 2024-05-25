@@ -11,6 +11,7 @@ public final  class AulaEntity {
     private String nombre;
     private BloqueEntity bloque;
     private TipoAulaEntity tipoAula;
+    private int capacidad;
 
     private AulaEntity(final int id){
         setId(id);
@@ -18,7 +19,7 @@ public final  class AulaEntity {
         setBloque(BloqueEntity.build());
     }
 
-    public AulaEntity(final int id, final String nombre, final BloqueEntity bloque, final TipoAulaEntity tipoAula){ {
+    public AulaEntity(final int id, final String nombre, final BloqueEntity bloque, final TipoAulaEntity tipoAula, final int capacidad){ {
         setId(id);
         setNombre(nombre);
         setBloque(AulaEntity.this.bloque);
@@ -26,8 +27,8 @@ public final  class AulaEntity {
     }
     }
 
-    public static final AulaEntity build(final int id, final String nombre, final String bloque, final String tipoAula){
-        return new AulaEntity(id, nombre, BloqueEntity.build(bloque), TipoAulaEntity.build(tipoAula));
+    public static final AulaEntity build(final int id, final String nombre, final String bloque, final String tipoAula , final int capacidad){
+        return new AulaEntity(id, nombre, BloqueEntity.build(bloque), TipoAulaEntity.build(tipoAula), capacidad);
     }
 
     public static final AulaEntity build(final int id){
@@ -56,6 +57,15 @@ public final  class AulaEntity {
 
     public final TipoAulaEntity getTipoAula() {
         return tipoAula;
+    }
+
+    public  final int getCapacidad() {
+        return capacidad;
+    }
+
+    public  final AulaEntity setCapacidad(int capacidad) {
+        this.capacidad = NumericHelper.ZERO;
+        return this;
     }
 
     private final void setId(final int id) {
