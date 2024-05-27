@@ -1,4 +1,5 @@
 package com.doo.ubico.crosscutting.exception.messagecatalog.impl;
+<<<<<<< Updated upstream
 
 
 import com.doo.ubico.crosscutting.exception.UbicoException;
@@ -7,9 +8,18 @@ import com.doo.ubico.crosscutting.exception.messagecatalog.MessageCatalog;
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.CodigoMensaje;
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.Mensaje;
 import com.doo.ubico.crosscutting.helpers.ObjectHelper;
+=======
+>>>>>>> Stashed changes
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.doo.ubico.crosscutting.exception.messagecatalog.MessageCatalog;
+import com.doo.ubico.crosscutting.exception.messagecatalog.data.CodigoMensaje;
+import com.doo.ubico.crosscutting.exception.messagecatalog.data.Mensaje;
+import com.doo.ubico.crosscutting.helpers.ObjectHelper;
+
+import co.edu.uco.tiendachepito.crosscutting.exceptions.custom.CrosscuttingTiendaChepitoException;
 
 public final class MessageCatalogBase implements MessageCatalog {
 
@@ -75,21 +85,39 @@ public final class MessageCatalogBase implements MessageCatalog {
 		if (ObjectHelper.getObjectHelper().isNull(codigo)) {
 			var mensajeUsuario = obtenerContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00001);
+<<<<<<< Updated upstream
 			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
+=======
+
+			throw new CrosscuttingTiendaChepitoException(mensajeTecnico, mensajeUsuario);
+>>>>>>> Stashed changes
 		}
 
 		if (!codigo.isBase()) {
 			var mensajeUsuario = obtenerContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00004, codigo.getIdentificador());
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
 		}
 
 		if (!mensajes.containsKey(codigo.getIdentificador())) {
 			var mensajeUsuario = obtenerContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00003, codigo.getIdentificador());
+<<<<<<< Updated upstream
 			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
 		}
 
+=======
+
+			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
+		}
+
+		// TODO: Tarea: asegure que si tiene parámetros, el contenido
+		// del mensaje se retorne con los parámetros reemplazados
+>>>>>>> Stashed changes
 
 		return mensajes.get(codigo.getIdentificador());
 	}

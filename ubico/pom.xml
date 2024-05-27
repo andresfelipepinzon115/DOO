@@ -47,6 +47,11 @@
 			<artifactId>lombok</artifactId>
 			<scope>annotationProcessor</scope>
 		</dependency>
+		<dependency>
+			<groupId>co.edu.uco.tiendachepito</groupId>
+			<artifactId>tienda-chepito</artifactId>
+			<version>3.2.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>

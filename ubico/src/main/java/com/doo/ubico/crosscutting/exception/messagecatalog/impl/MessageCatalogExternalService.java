@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 package com.doo.ubico.crosscutting.exception.messagecatalog.impl;
 
 
@@ -7,6 +11,10 @@ import com.doo.ubico.crosscutting.exception.messagecatalog.MessageCatalogStrateg
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.CodigoMensaje;
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.Mensaje;
 import com.doo.ubico.crosscutting.helpers.ObjectHelper;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,23 +43,42 @@ public final class MessageCatalogExternalService implements MessageCatalog {
 		if (ObjectHelper.getObjectHelper().isNull(codigo)) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00001);
+<<<<<<< Updated upstream
 			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
+=======
+
+
+>>>>>>> Stashed changes
 		}
 
 		if (codigo.isBase()) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00005,
 					codigo.getIdentificador());
+<<<<<<< Updated upstream
 			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
+=======
+
+
+>>>>>>> Stashed changes
 		}
 
 		if (!mensajes.containsKey(codigo.getIdentificador())) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00006,
 					codigo.getIdentificador());
+<<<<<<< Updated upstream
 			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
 		}
 
+=======
+
+
+			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
+		}
+
+
+>>>>>>> Stashed changes
 
 		return mensajes.get(codigo.getIdentificador());
 	}

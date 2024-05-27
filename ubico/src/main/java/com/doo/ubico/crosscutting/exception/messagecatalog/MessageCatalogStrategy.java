@@ -1,8 +1,12 @@
 package com.doo.ubico.crosscutting.exception.messagecatalog;
 
+<<<<<<< Updated upstream
 
 
 import com.doo.ubico.crosscutting.exception.custom.CrosscuttingUbicoException;
+=======
+import com.doo.ubico.crosscutting.exception.UbicoException;
+>>>>>>> Stashed changes
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.CodigoMensaje;
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.Mensaje;
 import com.doo.ubico.crosscutting.exception.messagecatalog.impl.MessageCatalogBase;
@@ -36,10 +40,16 @@ public final class MessageCatalogStrategy {
 		if (ObjectHelper.getObjectHelper().isNull(codigo)) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00001);
+<<<<<<< Updated upstream
 			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
 		}
+=======
+>>>>>>> Stashed changes
 
-		return getStrategy(codigo.isBase()).obtenerMensaje(codigo, parametros);
+			throw new UbicoException(mensajeTecnico, mensajeUsuario);
+		}
+		
+		return getStrategy(codigo.isBase()).obtenerContenidoMensaje(codigo, parametros);
 	}
 
 	public static final String getContenidoMensaje(final CodigoMensaje codigo, final String... parametros) {
@@ -47,7 +57,7 @@ public final class MessageCatalogStrategy {
 	}
 
 	public static void main(String[] args) {
-		//System.out.println(getContenidoMensaje(CodigoMensaje.M00008));
+		// System.out.println(getContenidoMensaje(CodigoMensaje.M00008));
 	}
 
 }

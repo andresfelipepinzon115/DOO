@@ -1,4 +1,9 @@
 package com.doo.ubico.crosscutting.helpers;
+<<<<<<< Updated upstream
+=======
+
+import static com.doo.ubico.crosscutting.helpers.ObjectHelper.getObjectHelper;
+>>>>>>> Stashed changes
 
 import static com.doo.ubico.crosscutting.helpers.ObjectHelper.getObjectHelper;
 public final class TextHelper {
@@ -46,4 +51,8 @@ public final class TextHelper {
 	public static final String getHour() {
 		return String.format("%02d", HORA_DEFECTO);
 	}
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 }

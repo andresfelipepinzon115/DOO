@@ -1,7 +1,6 @@
-package co.edu.uco.tiendachepito.crosscutting.crosscutting.exception.messagecatalog;
+package com.doo.ubico.crosscutting.exception.messagecatalog;
 
-import co.edu.uco.tiendachepito.crosscutting.crosscutting.exception.messagecatalog.data.CodigoMensaje;
-import co.edu.uco.tiendachepito.crosscutting.crosscutting.exception.messagecatalog.data.Mensaje;
+import 	com.doo.ubico.crosscutting.exception.messagecatalog.data.*;
 
 public interface MessageCatalog {
 

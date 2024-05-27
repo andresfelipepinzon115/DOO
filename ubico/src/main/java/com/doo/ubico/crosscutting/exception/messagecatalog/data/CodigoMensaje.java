@@ -1,9 +1,14 @@
 package com.doo.ubico.crosscutting.exception.messagecatalog.data;
 
+<<<<<<< Updated upstream
 
 import static com.doo.ubico.crosscutting.helpers.TextHelper.UNDERLINE;
 import static com.doo.ubico.crosscutting.helpers.TextHelper.concatenate;
 
+=======
+import static com.doo.ubico.crosscutting.helpers.TextHelper.UNDERLINE;
+import static com.doo.ubico.crosscutting.helpers.TextHelper.concatenate;
+>>>>>>> Stashed changes
 
 public enum CodigoMensaje {
 
