@@ -1,13 +1,10 @@
 package com.doo.ubico.entity;
 
+
 import com.doo.ubico.crosscutting.helpers.NumericHelper;
 import com.doo.ubico.crosscutting.helpers.TextHelper;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 
 public final  class MotivoNoDisponibilidadEntity {
@@ -58,5 +55,5 @@ public final  class MotivoNoDisponibilidadEntity {
     private final void setNombre(final String nombre) {
         this.nombre = TextHelper.applyTrim(nombre);
     }
-
 }
+

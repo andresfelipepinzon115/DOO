@@ -1,99 +1,95 @@
 package com.doo.ubico.entity;
 
-import com.doo.ubico.crosscutting.helpers.NumericHelper;
-import com.doo.ubico.crosscutting.helpers.ObjectHelper;
-import com.doo.ubico.crosscutting.helpers.TextHelper;
-
 import java.time.LocalDateTime;
 
-public final  class ExcepcionEntity {
-    private  int id;
-    private LocalDateTime fecha;
-    private LocalDateTime HoraInicio;
-    private LocalDateTime HoraFin;
-    private AulaEntity aula;
-    private  MotivoNoDisponibilidadEntity motivo;
+import com.doo.ubico.crosscutting.helpers.NumericHelper;
+import com.doo.ubico.crosscutting.helpers.ObjectHelper;
 
-    private ExcepcionEntity(final int id) {
-        setId(id);
-        setMotivo(MotivoNoDisponibilidadEntity.build());
-        setFecha(LocalDateTime.now());
-        setHoraInicio(LocalDateTime.now());
-        setHoraFin(LocalDateTime.now());
-    }
+public final class ExcepcionEntity {
+	private int id;
+	private LocalDateTime fecha;
+	private LocalDateTime HoraInicio;
+	private LocalDateTime HoraFin;
+	private AulaEntity aula;
+	private MotivoNoDisponibilidadEntity motivo;
 
-    public ExcepcionEntity(final int id, final String nombre) {
+	private ExcepcionEntity(final int id) {
+		setId(id);
+		setMotivo(MotivoNoDisponibilidadEntity.build());
+		setFecha(LocalDateTime.now());
+		setHoraInicio(LocalDateTime.now());
+		setHoraFin(LocalDateTime.now());
+	}
 
+	public ExcepcionEntity(final int id, final String nombre) {
 
-    }
+	}
 
+	public static final ExcepcionEntity build(final int id) {
+		return new ExcepcionEntity(id);
+	}
 
+	public static final ExcepcionEntity build(final int id, final String nombre) {
+		return new ExcepcionEntity(id, nombre);
+	}
 
+	protected static final ExcepcionEntity build() {
+		return new ExcepcionEntity(NumericHelper.ZERO);
+	}
 
-    public static final ExcepcionEntity build(final int id){
-        return new ExcepcionEntity(id);
-    }
+	public final AulaEntity getAula() {
+		return aula;
+	}
 
-    public static final ExcepcionEntity build(final int id, final String nombre){
-        return new ExcepcionEntity(id,nombre);
-    }
+	public final LocalDateTime getFecha() {
+		return fecha;
+	}
 
-    protected static final ExcepcionEntity build(){
-        return new ExcepcionEntity(NumericHelper.ZERO);
-    }
+	public final LocalDateTime getHoraFin() {
+		return HoraFin;
+	}
 
-    public final AulaEntity getAula() {
-        return aula;
-    }
+	public final LocalDateTime getHoraInicio() {
+		return HoraInicio;
+	}
 
-    public final LocalDateTime getFecha() {
-        return fecha;
-    }
+	public final int getId() {
+		return id;
+	}
 
-    public final  LocalDateTime getHoraFin() {
-        return HoraFin;
-    }
+	public final MotivoNoDisponibilidadEntity getMotivo() {
+		return motivo;
+	}
 
-    public final LocalDateTime getHoraInicio() {
-        return HoraInicio;
-    }
+	private final AulaEntity setAula(final AulaEntity aula) {
+		this.aula = ObjectHelper.getObjectHelper().getDefault(aula, AulaEntity.build());
+		return aula;
+	}
 
-    public final int getId() {
-        return id;
-    }
+	private final LocalDateTime setFecha(LocalDateTime fecha) {
+		this.fecha = LocalDateTime.now();
+		return fecha;
+	}
 
-    public final MotivoNoDisponibilidadEntity getMotivo() {
-        return motivo;
-    }
+	private final LocalDateTime setHoraFin(LocalDateTime horaFin) {
+		// HoraFin = TextHelper.getHour(horaFin);
+		return null;
+	}
 
-    private final  AulaEntity setAula( final AulaEntity aula) {
-        this.aula = ObjectHelper.getObjectHelper().getDefault(aula, AulaEntity.build());
-        return aula;
-    }
+	private final LocalDateTime setHoraInicio(LocalDateTime horaInicio) {
+//		HoraInicio = TextHelper.getHoraDefecto();
+//		return HoraInicio;
+		return null;
+	}
 
-    private final  LocalDateTime setFecha(LocalDateTime fecha) {
-        this.fecha = LocalDateTime.now();
-        return fecha;
-    }
+	private final int setId(int id) {
+		this.id = id;
+		return id;
+	}
 
-    private final  LocalDateTime setHoraFin(LocalDateTime horaFin) {
-        HoraFin = TextHelper.getHoraDefecto();
-        return HoraFin;
-    }
+	private final MotivoNoDisponibilidadEntity setMotivo(final MotivoNoDisponibilidadEntity motivo) {
+		this.motivo = ObjectHelper.getObjectHelper().getDefault(motivo, MotivoNoDisponibilidadEntity.build());
+		return motivo;
+	}
 
-    private final  LocalDateTime setHoraInicio(LocalDateTime horaInicio) {
-        HoraInicio = TextHelper.getHoraDefecto();
-        return HoraInicio;
-    }
-
-    private final  int setId(int id) {
-        this.id = id;
-        return id;
-    }
-
-    private final  MotivoNoDisponibilidadEntity setMotivo(final MotivoNoDisponibilidadEntity motivo) {
-        this.motivo = ObjectHelper.getObjectHelper().getDefault(motivo, MotivoNoDisponibilidadEntity.build());
-        return motivo;
-    }
 }
-

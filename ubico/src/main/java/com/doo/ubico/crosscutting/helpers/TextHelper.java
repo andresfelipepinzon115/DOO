@@ -1,10 +1,12 @@
 package com.doo.ubico.crosscutting.helpers;
 
 import static com.doo.ubico.crosscutting.helpers.ObjectHelper.getObjectHelper;
+
 public final class TextHelper {
 
 	public static final String EMPTY = "";
 	public static final String UNDERLINE = "_";
+	private static final int HORA_DEFECTO = 0;
 
 	private TextHelper() {
 		super();
@@ -40,6 +42,10 @@ public final class TextHelper {
 		}
 
 		return sb.toString();
+	}
+
+	public static final String getHour() {
+		return String.format("%02d", HORA_DEFECTO);
 	}
 
 }
