@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 public  final class DisponibilidadEntity {
     private  int id;
     private LocalDateTime fecha;
-    private LocalDateTime HoraInicio;
-    private LocalDateTime HoraFin;
+    private String HoraInicio;
+    private String HoraFin;
     private AulaEntity aula;
     private  MotivoNoDisponibilidadEntity motivo;
 
@@ -47,11 +47,11 @@ public  final class DisponibilidadEntity {
         return fecha;
     }
 
-    public final  LocalDateTime getHoraFin() {
+    public final  String getHoraFin() {
         return HoraFin;
     }
 
-    public final LocalDateTime getHoraInicio() {
+    public final String getHoraInicio() {
         return HoraInicio;
     }
 
@@ -70,13 +70,13 @@ public  final class DisponibilidadEntity {
         return fecha;
     }
 
-    private final  LocalDateTime setHoraFin(LocalDateTime horaFin) {
-        HoraFin = TextHelper.getHoraDefecto();
+    private final  String setHoraFin(LocalDateTime horaFin) {
+        HoraFin = TextHelper.getHour();
         return HoraFin;
     }
 
-    private final  LocalDateTime setHoraInicio(LocalDateTime horaInicio) {
-        HoraInicio = TextHelper.getHoraDefecto();
+    private final  String setHoraInicio(LocalDateTime horaInicio) {
+        HoraInicio = TextHelper.getHour();
         return HoraInicio;
     }
 

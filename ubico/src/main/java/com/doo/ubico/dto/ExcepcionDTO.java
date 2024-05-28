@@ -12,12 +12,12 @@ public class ExcepcionDTO {
     private String nombre;
     private MotivoNoDisponibilidadDTO motivo;
     private LocalDateTime fecha;
-    private LocalDateTime HoraInicio;
-    private LocalDateTime HoraFin;
+    private String HoraInicio;
+    private String HoraFin;
     private AulaDTO aula;
 
 
-    public ExcepcionDTO(final int id, final String nombre, final MotivoNoDisponibilidadDTO motivo, final LocalDateTime fecha, final LocalDateTime HoraInicio, final LocalDateTime HoraFin, final AulaDTO aula) {
+    public ExcepcionDTO(final int id, final String nombre, final MotivoNoDisponibilidadDTO motivo, final LocalDateTime fecha, final String HoraInicio, final String HoraFin, final AulaDTO aula) {
         setId(id);
         setMotivo(motivo);
         setFecha(fecha);
@@ -30,8 +30,8 @@ public class ExcepcionDTO {
         setId(id);
         setMotivo(MotivoNoDisponibilidadDTO.build());
         setFecha(LocalDateTime.now());
-        setHoraInicio(LocalDateTime.now());
-        setHoraFin(LocalDateTime.now());
+        setHoraInicio(HoraInicio);
+        setHoraFin(HoraFin);
 
     }
 
@@ -43,11 +43,11 @@ public class ExcepcionDTO {
         return fecha;
     }
 
-    public final  LocalDateTime getHoraFin() {
+    public final  String getHoraFin() {
         return HoraFin;
     }
 
-    public final LocalDateTime getHoraInicio() {
+    public final String getHoraInicio() {
         return HoraInicio;
     }
 
@@ -69,13 +69,13 @@ public class ExcepcionDTO {
         return fecha;
     }
 
-    private final  LocalDateTime setHoraFin(LocalDateTime horaFin) {
-        HoraFin = TextHelper.getHoraDefecto();
+    private final  String setHoraFin(String horaFin) {
+        HoraFin = TextHelper.getHour();
         return HoraFin;
     }
 
-    private final  LocalDateTime setHoraInicio(LocalDateTime horaInicio) {
-        HoraInicio = TextHelper.getHoraDefecto();
+    private final  String setHoraInicio(String horaInicio) {
+        HoraInicio = TextHelper.getHour();
         return HoraInicio;
     }
 

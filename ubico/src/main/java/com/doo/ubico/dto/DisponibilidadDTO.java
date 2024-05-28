@@ -3,14 +3,15 @@ package com.doo.ubico.dto;
 import java.time.LocalDateTime;
 
 import com.doo.ubico.crosscutting.helpers.ObjectHelper;
+import com.doo.ubico.crosscutting.helpers.TextHelper;
 
 public class DisponibilidadDTO {
 
 	private int id;
 	private String nombre;
 	private LocalDateTime fecha;
-	private LocalDateTime HoraInicio;
-	private LocalDateTime HoraFin;
+	private String HoraInicio;
+	private String HoraFin;
 	private AulaDTO aula;
 
 	public DisponibilidadDTO(final int id, final String nombre, final LocalDateTime fecha,
@@ -38,11 +39,11 @@ public class DisponibilidadDTO {
 		return fecha;
 	}
 
-	public final LocalDateTime getHoraFin() {
+	public final String getHoraFin() {
 		return HoraFin;
 	}
 
-	public final LocalDateTime getHoraInicio() {
+	public final String getHoraInicio() {
 		return HoraInicio;
 	}
 
@@ -60,16 +61,15 @@ public class DisponibilidadDTO {
 		return fecha;
 	}
 
-	private final LocalDateTime setHoraFin(LocalDateTime horaFin) {
-//		HoraFin = TextHelper.getHoraDefecto();
-//		return HoraFin;
-		return null;
+	private final String setHoraFin(LocalDateTime horaFin) {
+		this.HoraFin = TextHelper.getHour();
+		return HoraFin;
 	}
 
-	private final LocalDateTime setHoraInicio(LocalDateTime horaInicio) {
-//		HoraInicio = TextHelper.getHoraDefecto();
-//		return HoraInicio;
-		return null;
+	private final String setHoraInicio(LocalDateTime horaInicio) {
+		this.HoraInicio = TextHelper.getHour();
+		return HoraInicio;
+
 	}
 
 	private final int setId(int id) {

@@ -1,1 +1,1 @@
-package co.edu.uco.tiendachepito.crosscutting;
+package com.doo.ubico.crosscutting;

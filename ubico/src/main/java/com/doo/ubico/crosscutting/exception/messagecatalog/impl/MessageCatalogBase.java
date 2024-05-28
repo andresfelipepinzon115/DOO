@@ -3,6 +3,7 @@ package com.doo.ubico.crosscutting.exception.messagecatalog.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.doo.ubico.crosscutting.exception.custom.CrosscuttingUbicoException;
 import com.doo.ubico.crosscutting.exception.messagecatalog.MessageCatalog;
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.CodigoMensaje;
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.Mensaje;

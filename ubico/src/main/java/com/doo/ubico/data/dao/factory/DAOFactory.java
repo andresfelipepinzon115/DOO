@@ -10,6 +10,7 @@ import com.doo.ubico.data.dao.factory.enums.Factory;
 
 import com.doo.ubico.data.dao.factory.sql.azuresql.AzureSqlDAOFactory;
 import com.doo.ubico.data.dao.sql.*;
+import com.doo.ubico.data.dao.sql.azuresql.AulaAzureSqlDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,7 @@ public abstract class DAOFactory {
         DAOFactory.getFactory(Factory.AZURE_SQL).getAulaDAO().crear(null);
         DAOFactory.getFactory(Factory.AZURE_SQL).getAulaDAO().actualizar(null);
         DAOFactory.getFactory(Factory.AZURE_SQL).getAulaDAO().eliminar(0);
-//        List<PaisAzureSqlDAO> paisAzureSql = new ArrayList<PaisAzureSqlDAO>();
+        List<AulaAzureSqlDAO> AulaAzureSql = new ArrayList<AulaAzureSqlDAO>();
     }
 
 }

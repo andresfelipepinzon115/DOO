@@ -1,6 +1,7 @@
 package com.doo.ubico.crosscutting.exception.messagecatalog;
 
 import com.doo.ubico.crosscutting.exception.UbicoException;
+import com.doo.ubico.crosscutting.exception.custom.CrosscuttingUbicoException;
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.CodigoMensaje;
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.Mensaje;
 import com.doo.ubico.crosscutting.exception.messagecatalog.impl.MessageCatalogBase;
@@ -34,11 +35,10 @@ public final class MessageCatalogStrategy {
 		if (ObjectHelper.getObjectHelper().isNull(codigo)) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00001);
-
-			throw new UbicoException(mensajeTecnico, mensajeUsuario);
+			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
 		}
 		
-		return getStrategy(codigo.isBase()).obtenerContenidoMensaje(codigo, parametros);
+		return getStrategy(codigo.isBase()).obtenerMensaje(codigo, parametros);
 	}
 
 	public static final String getContenidoMensaje(final CodigoMensaje codigo, final String... parametros) {
