@@ -15,7 +15,7 @@ public class RegistrarAulaFachadaImpl implements RegistrarAulaFachada{
 	private  final DAOFactory factory;
 	
 	public RegistrarAulaFachadaImpl() {
-		factory= DAOFactory.getFactory(Factory.AZURE_SQL);
+		factory= DAOFactory.getFactory();
 	}
 	
 	

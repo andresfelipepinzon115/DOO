@@ -1,5 +1,6 @@
 package com.doo.ubico.business.assembler.dto.concrete;
 
+import com.doo.ubico.business.assembler.dto.AssemblerDTO;
 import com.doo.ubico.dto.AulaDTO;
 import com.doo.ubico.dto.BloqueDTO;
 import com.doo.ubico.dto.TipoAulaDTO;
@@ -19,7 +20,7 @@ public class AulaDTODomainAssembler implements DTODomainAssembler <AulaDomain, A
 
 
 	private static final DTODomainAssembler<BloqueDomain, BloqueDTO> BloqueAssembler = BloqueDTODomainAssembler.obtenerInstancia();
-	private static final DTODomainAssembler<TipoAulaDomain, TipoAulaDTO> TipoAulaAssembler = TipoAulaDTODomainAssembler.obtenerInstancia();
+	private static final AssemblerDTO<TipoAulaDomain, TipoAulaDTO> TipoAulaAssembler = TipoAulaDTODomainAssembler.getInstance();
 
 	private AulaDTODomainAssembler() {
 		super();
@@ -35,7 +36,7 @@ public class AulaDTODomainAssembler implements DTODomainAssembler <AulaDomain, A
 	@Override
 	public AulaDomain ensamblarDominio(AulaDTO dto) {
 		var AulaDtoTmp = ObjectHelper.getObjectHelper().getDefault(dto, new AulaDTO());
-		var TipoAulaDomain = TipoAulaAssembler.ensamblarDominio(AulaDtoTmp.getTipoAula());
+		var TipoAulaDomain = TipoAulaAssembler.toDomain(AulaDtoTmp.getTipoAula());
 		var BloqueDomain = BloqueAssembler.ensamblarDominio(AulaDtoTmp.getBloque());
 
 		return AulaDomain.crear(AulaDtoTmp.getId(), AulaDtoTmp.getNombre(), AulaDtoTmp.getCapacidad(), BloqueDomain, TipoAulaDomain);
@@ -45,9 +46,14 @@ public class AulaDTODomainAssembler implements DTODomainAssembler <AulaDomain, A
 	@Override
 	public AulaDTO ensamblarDTO(AulaDomain dominio) {
 		var AulaDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, AulaDomain.crear());
-		var TipoAulaDTO = TipoAulaAssembler.ensamblarDTO(AulaDomainTmp.getTipoAula());
+		var TipoAulaDTO = TipoAulaAssembler.toDTO(AulaDomainTmp.getTipoAula());
 		var BloqueDTO = BloqueAssembler.ensamblarDTO(AulaDomainTmp.getBloque());
 		return AulaDTO.build().setId(AulaDomainTmp.getId()).setNombre(AulaDomainTmp.getNombre()).setCapacidad(AulaDomainTmp.getCapacidad()).setTipoAula(TipoAulaDTO).setBloque(BloqueDTO);
+	}
+
+	@Override
+	public List<BloqueDTO> toDTOCollection(List<BloqueDomain> domainCollection) {
+		return List.of();
 	}
 }
 
