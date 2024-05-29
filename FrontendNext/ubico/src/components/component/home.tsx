@@ -1,9 +1,10 @@
 "use client"; // Asegura que este archivo se interprete como un componente del cliente
 
-import { useState } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import axios from 'axios';
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button"; // Asegúrate de importar correctamente el botón
 import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card";
 
 export function HomeComponent() {
@@ -11,18 +12,36 @@ export function HomeComponent() {
   const [type, setType] = useState('');
   const [capacity, setCapacity] = useState('');
   const [name, setName] = useState('');
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+  const [blocks, setBlocks] = useState<string[]>([]);
+  const [types, setTypes] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchBlocksAndTypes = async () => {
+      try {
+        const [blocksResponse, typesResponse] = await Promise.all([
+          axios.get('http://localhost:8080/api/blocks'),
+          axios.get('http://localhost:8080/api/types')
+        ]);
+        setBlocks(blocksResponse.data);
+        setTypes(typesResponse.data);
+      } catch (error) {
+        console.error('Error al obtener los bloques y tipos', error);
+      }
+    };
+    fetchBlocksAndTypes();
+  }, []);
 
   const isFormValid = () => {
     return block && type && capacity && name;
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     if (isFormValid()) {
       try {
         const aula = { block, type, capacity, name };
-        const response = await axios.post('/api/aulas', aula);
+        const response = await axios.post('http://localhost:8080/api/aulas', aula); // Ajusta la URL si es necesario
         console.log('Aula agregada', response.data);
         setErrors({});
       } catch (error) {
@@ -39,14 +58,14 @@ export function HomeComponent() {
     }
   };
 
-  const handleNameChange = (e) => {
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*$/.test(value)) { // Solo permite valores numéricos
       setName(value);
     }
   };
 
-  const handleCapacityChange = (e) => {
+  const handleCapacityChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*$/.test(value)) { // Solo permite valores numéricos
       setCapacity(value);
@@ -70,10 +89,9 @@ export function HomeComponent() {
                 <SelectValue placeholder="Selecciona un bloque" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="block1">Bloque 1</SelectItem>
-                <SelectItem value="block2">Bloque 2</SelectItem>
-                <SelectItem value="block3">Bloque 3</SelectItem>
-                <SelectItem value="block4">Bloque 4</SelectItem>
+                {blocks.map((block, index) => (
+                  <SelectItem key={index} value={block}>{block}</SelectItem>
+                ))}
               </SelectContent>
             </Select>
             {errors.block && <p className="text-red-500 text-sm">Este campo es requerido.</p>}
@@ -87,9 +105,9 @@ export function HomeComponent() {
                 <SelectValue placeholder="Selecciona un tipo de aula" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="aulacomun">Aula Común</SelectItem>
-                <SelectItem value="salonInformatica">Salón de Informática</SelectItem>
-                <SelectItem value="laboratorio">Laboratorio</SelectItem>
+                {types.map((type, index) => (
+                  <SelectItem key={index} value={type}>{type}</SelectItem>
+                ))}
               </SelectContent>
             </Select>
             {errors.type && <p className="text-red-500 text-sm">Este campo es requerido.</p>}
@@ -103,9 +121,9 @@ export function HomeComponent() {
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="name">
-              numero del Aula
+              número del Aula
             </label>
-            <Input id="name" placeholder="Ingresa el numero del aula" type="text" value={name} onChange={handleNameChange} />
+            <Input id="name" placeholder="Ingresa el número del aula" type="text" value={name} onChange={handleNameChange} />
             {errors.name && <p className="text-red-500 text-sm">Este campo es requerido y solo debe contener números.</p>}
           </div>
           <div className="col-span-4 flex justify-end">
