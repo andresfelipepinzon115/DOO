@@ -22,11 +22,8 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/api/types")
+@RequestMapping("/api/v1/types")
 public final class TipoAulaController {
-
-    @Autowired
-    private ConsultarTipoAulaFacade consultarTipoAulasFacade;
 
     @GetMapping("/dummy")
     public TipoAulaDTO dummy() {
@@ -40,7 +37,8 @@ public final class TipoAulaController {
 
         try {
             var tipoAulaDto = TipoAulaDTO.build();
-            tipoAulaResponse.setDatos(consultarTipoAulasFacade.execute(tipoAulaDto));
+            var facade = new ConsultarTipoAulaFacade();
+            tipoAulaResponse.setDatos(facade.execute(tipoAulaDto));
             tipoAulaResponse.getMensajes().add("Tipos de aula consultados exitosamente");
         } catch (final UbicoException exception) {
             httpStatusCode = HttpStatus.BAD_REQUEST;
@@ -55,4 +53,74 @@ public final class TipoAulaController {
 
         return new ResponseEntity<>(tipoAulaResponse, httpStatusCode);
     }
+
+   /* @PostMapping
+    public ResponseEntity<TipoAulaResponse> crear(@RequestBody TipoAulaDTO tipoAula) {
+        var httpStatusCode = HttpStatus.ACCEPTED;
+        var tipoAulaResponse = new TipoAulaResponse();
+
+        try {
+            var facade = new RegistrarTipoAulaFacade();
+            facade.execute(tipoAula);
+            tipoAulaResponse.getMensajes().add("Tipo de aula creado exitosamente");
+        } catch (final UbicoException exception) {
+            httpStatusCode = HttpStatus.BAD_REQUEST;
+            tipoAulaResponse.getMensajes().add(exception.getMensajeUsuario());
+            exception.printStackTrace();
+        } catch (final Exception exception) {
+            httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            var mensajeUsuario = "Se ha presentado un problema tratando de registrar el nuevo tipo de aula";
+            tipoAulaResponse.getMensajes().add(mensajeUsuario);
+            exception.printStackTrace();
+        }
+
+        return new ResponseEntity<>(tipoAulaResponse, httpStatusCode);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<TipoAulaResponse> eliminar(@PathVariable int id) {
+        var httpStatusCode = HttpStatus.ACCEPTED;
+        var tipoAulaResponse = new TipoAulaResponse();
+
+        try {
+            var facade = new EliminarTipoAulaFacade();
+            facade.execute(id);
+            tipoAulaResponse.getMensajes().add("Tipo de aula eliminado exitosamente");
+        } catch (final UbicoException exception) {
+            httpStatusCode = HttpStatus.BAD_REQUEST;
+            tipoAulaResponse.getMensajes().add(exception.getMensajeUsuario());
+            exception.printStackTrace();
+        } catch (final Exception exception) {
+            httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            var mensajeUsuario = "Se ha presentado un problema tratando de eliminar el tipo de aula";
+            tipoAulaResponse.getMensajes().add(mensajeUsuario);
+            exception.printStackTrace();
+        }
+
+        return new ResponseEntity<>(tipoAulaResponse, httpStatusCode);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TipoAulaResponse> modificar(@PathVariable int id, @RequestBody TipoAulaDTO tipoAulaDTO) {
+        var httpStatusCode = HttpStatus.ACCEPTED;
+        var tipoAulaResponse = new TipoAulaResponse();
+
+        try {
+            tipoAulaDTO.setId(id);
+            var facade = new ModificarTipoAulaFacade();
+            facade.execute(tipoAulaDTO);
+            tipoAulaResponse.getMensajes().add("Tipo de aula modificado exitosamente");
+        } catch (final UbicoException exception) {
+            httpStatusCode = HttpStatus.BAD_REQUEST;
+            tipoAulaResponse.getMensajes().add(exception.getMensajeUsuario());
+            exception.printStackTrace();
+        } catch (final Exception exception) {
+            httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            var mensajeUsuario = "Se ha presentado un problema tratando de modificar el tipo de aula";
+            tipoAulaResponse.getMensajes().add(mensajeUsuario);
+            exception.printStackTrace();
+        }
+
+        return new ResponseEntity<>(tipoAulaResponse, httpStatusCode);
+    }*/
 }

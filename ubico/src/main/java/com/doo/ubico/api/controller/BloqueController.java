@@ -46,12 +46,10 @@ import java.util.stream.Collectors;
 
 
 
-@RestController
-@RequestMapping("/api/blocks")
-public final class BloqueController {
 
-    @Autowired
-    private ConsultarBloquesFacade consultarBloquesFacade;
+@RestController
+@RequestMapping("/api/v1/blocks")
+public final class BloqueController {
 
     @GetMapping("/dummy")
     public BloqueDTO dummy() {
@@ -65,7 +63,8 @@ public final class BloqueController {
 
         try {
             var bloquesDto = BloqueDTO.build();
-            bloqueResponse.setDatos(consultarBloquesFacade.execute(bloquesDto));
+            var facade = new ConsultarBloquesFacade();
+            bloqueResponse.setDatos(facade.execute(bloquesDto));
             bloqueResponse.getMensajes().add("Bloques consultados exitosamente");
         } catch (final UbicoException exception) {
             httpStatusCode = HttpStatus.BAD_REQUEST;
@@ -80,4 +79,74 @@ public final class BloqueController {
 
         return new ResponseEntity<>(bloqueResponse, httpStatusCode);
     }
+/*
+    @PostMapping
+    public ResponseEntity<BloqueResponse> crear(@RequestBody BloqueDTO bloque) {
+        var httpStatusCode = HttpStatus.ACCEPTED;
+        var bloqueResponse = new BloqueResponse();
+
+        try {
+            var facade = new RegistrarBloqueFacade();
+            facade.execute(bloque);
+            bloqueResponse.getMensajes().add("Bloque creado exitosamente");
+        } catch (final UbicoException exception) {
+            httpStatusCode = HttpStatus.BAD_REQUEST;
+            bloqueResponse.getMensajes().add(exception.getMensajeUsuario());
+            exception.printStackTrace();
+        } catch (final Exception exception) {
+            httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            var mensajeUsuario = "Se ha presentado un problema tratando de registrar el nuevo bloque";
+            bloqueResponse.getMensajes().add(mensajeUsuario);
+            exception.printStackTrace();
+        }
+
+        return new ResponseEntity<>(bloqueResponse, httpStatusCode);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<BloqueResponse> eliminar(@PathVariable int id) {
+        var httpStatusCode = HttpStatus.ACCEPTED;
+        var bloqueResponse = new BloqueResponse();
+
+        try {
+            var facade = new EliminarBloqueFacade();
+            facade.execute(id);
+            bloqueResponse.getMensajes().add("Bloque eliminado exitosamente");
+        } catch (final UbicoException exception) {
+            httpStatusCode = HttpStatus.BAD_REQUEST;
+            bloqueResponse.getMensajes().add(exception.getMensajeUsuario());
+            exception.printStackTrace();
+        } catch (final Exception exception) {
+            httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            var mensajeUsuario = "Se ha presentado un problema tratando de eliminar el bloque";
+            bloqueResponse.getMensajes().add(mensajeUsuario);
+            exception.printStackTrace();
+        }
+
+        return new ResponseEntity<>(bloqueResponse, httpStatusCode);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<BloqueResponse> modificar(@PathVariable int id, @RequestBody BloqueDTO bloqueDTO) {
+        var httpStatusCode = HttpStatus.ACCEPTED;
+        var bloqueResponse = new BloqueResponse();
+
+        try {
+            bloqueDTO.setId(id);
+            var facade = new ModificarBloqueFacade();
+            facade.execute(bloqueDTO);
+            bloqueResponse.getMensajes().add("Bloque modificado exitosamente");
+        } catch (final UbicoException exception) {
+            httpStatusCode = HttpStatus.BAD_REQUEST;
+            bloqueResponse.getMensajes().add(exception.getMensajeUsuario());
+            exception.printStackTrace();
+        } catch (final Exception exception) {
+            httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            var mensajeUsuario = "Se ha presentado un problema tratando de modificar el bloque";
+            bloqueResponse.getMensajes().add(mensajeUsuario);
+            exception.printStackTrace();
+        }
+
+        return new ResponseEntity<>(bloqueResponse, httpStatusCode);
+    }*/
 }
