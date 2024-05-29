@@ -7,8 +7,8 @@ public class AulaDTO {
 
 	private int id;
 	private String nombre;
-	private BloqueDTO bloque;
 	private int capacidad;
+	private BloqueDTO bloque;
 	private TipoAulaDTO tipoAula;
 
 	public AulaDTO() {
@@ -20,7 +20,7 @@ public class AulaDTO {
 		return new AulaDTO();
 	}
 
-	public AulaDTO(final int id, final String nombre, final BloqueDTO bloque, final int capacidad,
+	public AulaDTO(final int id, final String nombre, final int capacidad, final BloqueDTO bloque,
 			final TipoAulaDTO tipoAula) {
 		setId(id);
 		setNombre(nombre);

@@ -15,31 +15,33 @@ public final class AulaEntity {
 	private AulaEntity(final int id) {
 		setId(id);
 		setNombre(TextHelper.EMPTY);
+		setCapacidad(capacidad);
+		setBloque(BloqueEntity.build());
+		setTipoAula(TipoAulaEntity.build());
+		
+	}
+	
+	public AulaEntity (final int id, final String nombre, final BloqueEntity bloque) {
+		setId(id);
+		setNombre(TextHelper.EMPTY);
 		setBloque(BloqueEntity.build());
 	}
 
-	public AulaEntity(final int id, final String nombre, final BloqueEntity bloque, final TipoAulaEntity tipoAula,
-			final int capacidad) {
+	public AulaEntity(final int id, final String nombre, final int capacidad, final BloqueEntity bloque, final TipoAulaEntity tipoAula) {
 		{
 			setId(id);
 			setNombre(nombre);
-			setBloque(AulaEntity.this.bloque);
-			setTipoAula(AulaEntity.this.tipoAula);
+			setBloque(bloque);
+			setTipoAula(tipoAula);
 			setCapacidad(capacidad);
 		}
 	}
 
-	public static final AulaEntity build(final int id, final String nombre, final String bloque, final String tipoAula,
-			final int capacidad) {
-		return new AulaEntity(id, nombre, BloqueEntity.build(bloque), TipoAulaEntity.build(tipoAula), capacidad);
+	public static final AulaEntity build(final int id, final String nombre, final int capacidad, final TipoAulaEntity tipoAula, final BloqueEntity bloque) {
+		return new AulaEntity(id, nombre,  capacidad, bloque, tipoAula);
 	}
 
 	public static final AulaEntity build(final int id) {
-		return new AulaEntity(id);
-	}
-
-	public static final AulaEntity build(final int id, final String nombre, final AulaEntity bloque,
-			final TipoAulaEntity tipoAula) {
 		return new AulaEntity(id);
 	}
 
@@ -67,7 +69,7 @@ public final class AulaEntity {
 		return capacidad;
 	}
 
-	public final AulaEntity setCapacidad(int capacidad) {
+	public final AulaEntity setCapacidad(final int capacidad) {
 		this.capacidad = NumericHelper.ZERO;
 		return this;
 	}
