@@ -22,94 +22,36 @@ public final class BloqueAzureSqlDAO extends SqlConnection implements BloqueDAO 
     }
 
     @Override
-    public final void actualizar(final BloqueEntity entidad) {
-        final var sentenciaSql = new StringBuilder();
-        sentenciaSql.append("UPDATE Bloque ");
-        sentenciaSql.append("SET Nombre = ? ");
-        sentenciaSql.append("WHERE Id = ? ");
+    public List<BloqueEntity> consultar(final BloqueEntity entity) {
+        final var listaBloques = new ArrayList<BloqueEntity>();
+        final var sql = "SELECT * FROM bloques";
 
-        try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {
-            sentenciaPreparada.setString(1, entidad.getNombre());
-            sentenciaPreparada.setInt(2, entidad.getId());
-            sentenciaPreparada.executeUpdate();
-        } catch (final SQLException exception) {
-            var mensajeUsuario = "No ha sido posible llevar a cabo la actualización de la información del Bloque. Por favor intente de nuevo y en caso de persistir el problema comuníquese con el administrador de la app Ubico";
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M000023, entidad.getNombre());
-            throw new DataUbicoException(mensajeTecnico, mensajeUsuario, exception);
-        } catch (final Exception exception) {
-            var mensajeUsuario = "No ha sido posible llevar a cabo la actualización de la información del Bloque. Por favor intente de nuevo y en caso de persistir el problema comuníquese con el administrador de la app Ubico";
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M000024, entidad.getNombre());
-            throw new DataUbicoException(mensajeTecnico, mensajeUsuario, exception);
-        }
-    }
-
-    @Override
-    public final List<BloqueEntity> consultar(final BloqueEntity entidad) {
-        final var listaBloque= new ArrayList<BloqueEntity>();
-        final var sentenciaSql = new StringBuilder();
-        sentenciaSql.append("SELECT Id, Nombre ");
-        sentenciaSql.append("FROM Bloque ");
-        sentenciaSql.append("ORDER BY Nombre ASC");
-
-        try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {
-            try (final ResultSet resultado = sentenciaPreparada.executeQuery()) {
-                List<BloqueEntity> Bloque = new ArrayList<>();
-                while (resultado.next()) {
-                	BloqueEntity BloqueTmp = BloqueEntity.build(resultado.getInt("Id"), resultado.getString("Nombre"));
-                    listaBloque.add(BloqueTmp);
-                }
+        try (final PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
+             final ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                var bloque = new BloqueEntity(resultSet.getInt("id"), resultSet.getString("nombre"));
+                listaBloques.add(bloque);
             }
-        } catch (final SQLException exception) {
-            var mensajeUsuario = "No ha sido posible llevar a cabo la consulta de los Bloques. Por favor intente de nuevo y en caso de persistir el problema comuníquese con el administrador de la app Ubico";
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M000023);
-            throw new DataUbicoException(mensajeTecnico, mensajeUsuario, exception);
-        } catch (final DataUbicoException exception){
-            throw exception;
-        } catch (final Exception exception) {
-            var mensajeUsuario = "No ha sido posible llevar a cabo la consulta de los Bloques. Por favor intente de nuevo y en caso de persistir el problema comuníquese con el administrador de la app Ubico";
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M000024);
-            throw new DataUbicoException(mensajeTecnico, mensajeUsuario, exception);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error al consultar los bloques", e);
         }
-        return listaBloque;
+
+        return listaBloques;
     }
 
     @Override
-    public final void crear(final BloqueEntity entidad) {
-        final var sentenciaSql = new StringBuilder();
-        sentenciaSql.append("INSERT INTO Bloque(Nombre) ");
-        sentenciaSql.append("VALUES ('M'), ('EDC'), ('J'), ('CO'), ('E'), ('D')");
+    public void actualizar(BloqueEntity entidad) {
 
-        try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {
-            sentenciaPreparada.setString(1, entidad.getNombre());
-            sentenciaPreparada.executeUpdate();
-        } catch (final SQLException exception) {
-            var mensajeUsuario = "No ha sido posible llevar a cabo el registro de la información del nuevo Bloque. Por favor intente de nuevo y en caso de persistir el problema comuníquese con el administrador de la app Ubico";
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M000023, entidad.getNombre());
-            throw new DataUbicoException(mensajeTecnico, mensajeUsuario, exception);
-        } catch (final Exception exception) {
-            var mensajeUsuario = "No ha sido posible llevar a cabo el registro de la información del nuevo Bloque. Por favor intente de nuevo y en caso de persistir el problema comuníquese con el administrador de la app Ubico";
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M000024, entidad.getNombre());
-            throw new DataUbicoException(mensajeTecnico, mensajeUsuario, exception);
-        }
     }
 
     @Override
-    public final void eliminar(final int id) {
-        final var sentenciaSql = new StringBuilder();
-        sentenciaSql.append("DELETE FROM Bloque ");
-        sentenciaSql.append("WHERE Id = ?");
+    public void crear(BloqueEntity entidad) {
 
-        try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {
-            sentenciaPreparada.setInt(1, id);
-            sentenciaPreparada.executeUpdate();
-        } catch (final SQLException exception) {
-            var mensajeUsuario = "No ha sido posible llevar a cabo la eliminación del Bloque. Por favor intente de nuevo y en caso de persistir el problema comuníquese con el administrador de la app Ubico";
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M000023, String.valueOf(id));
-            throw new DataUbicoException(mensajeTecnico, mensajeUsuario, exception);
-        } catch (final Exception exception) {
-            var mensajeUsuario = "No ha sido posible llevar a cabo la eliminación del Bloque. Por favor intente de nuevo y en caso de persistir el problema comuníquese con el administrador de la app Ubico";
-            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M000024, String.valueOf(id));
-            throw new DataUbicoException(mensajeTecnico, mensajeUsuario, exception);
-        }
+    }
+
+    @Override
+    public void eliminar(int id) {
+
     }
 }
