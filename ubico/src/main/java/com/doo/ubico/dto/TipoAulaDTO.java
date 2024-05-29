@@ -20,6 +20,10 @@ public class TipoAulaDTO {
         return new TipoAulaDTO();
     }
 
+    public static final TipoAulaDTO build(final int id,final String nombre){
+        return new TipoAulaDTO(id,nombre);
+    }
+
     public final int getId() {
         return id;
     }

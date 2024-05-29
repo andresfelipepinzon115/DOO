@@ -19,6 +19,10 @@ public class BloqueDTO {
         return new BloqueDTO();
     }
 
+    public static final BloqueDTO build(final int id,final String nombre){
+        return new BloqueDTO(id,nombre);
+    }
+
     public final int getId() {
         return id;
     }

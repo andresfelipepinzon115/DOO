@@ -42,11 +42,7 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>co.edu.uco.tiendachepito</groupId>
-			<artifactId>tienda-chepito</artifactId>
-			<version>3.2.4</version>
-		</dependency>
+
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>

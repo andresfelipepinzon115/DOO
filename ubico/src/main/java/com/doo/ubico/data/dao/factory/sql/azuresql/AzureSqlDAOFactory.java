@@ -4,43 +4,27 @@ import com.doo.ubico.crosscutting.exception.custom.DataUbicoException;
 import com.doo.ubico.crosscutting.exception.messagecatalog.MessageCatalogStrategy;
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.CodigoMensaje;
 import com.doo.ubico.crosscutting.helpers.SQLHelper;
-import com.doo.ubico.data.dao.AulaDAO;
-import com.doo.ubico.data.dao.BloqueDAO;
-import com.doo.ubico.data.dao.TipoAulaDAO;
 import com.doo.ubico.data.dao.factory.DAOFactory;
 import com.doo.ubico.data.dao.sql.azuresql.AulaAzureSqlDAO;
 import com.doo.ubico.data.dao.sql.azuresql.BloqueAzureSqlDAO;
 import com.doo.ubico.data.dao.sql.azuresql.TipoAulaAzureSqlDAO;
-import com.doo.ubico.dto.AulaDTO;
-import com.doo.ubico.entity.AulaEntity;
-import com.doo.ubico.data.dao.factory.enums.Factory;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.UUID;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-public final class AzureSqlDAOFactory extends DAOFactory {
+public final class AzureSqlDAOFactory implements DAOFactory {
 
     private Connection connection;
 
     public AzureSqlDAOFactory() {
         obtenerConexion();
-        cargarDatosPorDefecto();
+
     }
 
-    @Override
+
     protected void obtenerConexion() {
-        final String connectionUrl = "jdbc:sqlserver://wednesday.database.windows.net:1433;databaseName=wednesday;user=wednesdayDmlUser;password=w3dn3sd4y!";
+        final String connectionUrl = "jdbc:mysql://127.0.0.1:3306/ubico?user=root&password=0000";
 
         try {
             connection = DriverManager.getConnection(connectionUrl);
@@ -57,34 +41,32 @@ public final class AzureSqlDAOFactory extends DAOFactory {
         }
     }
 
-    private void cargarDatosPorDefecto() {
-        String sqlBloques = "INSERT INTO bloques (nombre) VALUES " +
-                "('M'), ('EDC'), ('J'), ('CO'),('E'),('D');";
-        String sqlTiposAula = "INSERT INTO tipos_aula (nombre) VALUES " +
-                "('Aula Común'), ('Salón de Informática'), ('Laboratorio');";
-
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate(sqlBloques);
-            statement.executeUpdate(sqlTiposAula);
-            System.out.println("Datos por defecto cargados exitosamente.");
-        } catch (SQLException e) {
-            System.out.println("Error al cargar datos por defecto: " + e.getMessage());
-        }
-    }
 
     @Override
     public void iniciarTransaccion() {
         SQLHelper.initTransaction(connection);
+
+
+
+
     }
 
     @Override
     public void confirmarTransaccion() {
         SQLHelper.commit(connection);
+
+
+
+
     }
 
     @Override
     public void cancelarTransaccion() {
         SQLHelper.rollback(connection);
+
+
+
+
     }
 
     @Override
@@ -93,17 +75,17 @@ public final class AzureSqlDAOFactory extends DAOFactory {
     }
 
     @Override
-    public AulaDAO getAulaDAO() {
+    public AulaAzureSqlDAO getAulaDAO() {
         return new AulaAzureSqlDAO(connection);
     }
 
     @Override
-    public BloqueDAO getBloqueDAO() {
+    public BloqueAzureSqlDAO getBloqueDAO() {
         return new BloqueAzureSqlDAO(connection);
     }
 
     @Override
-    public TipoAulaDAO getTipoAulaDAO() {
+    public TipoAulaAzureSqlDAO getTipoAulaDAO() {
         return new TipoAulaAzureSqlDAO(connection);
     }
 

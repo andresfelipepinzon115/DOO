@@ -1,41 +1,36 @@
 package com.doo.ubico.data.dao.factory;
 
-import com.doo.ubico.crosscutting.exception.custom.DataUbicoException;
-import com.doo.ubico.crosscutting.exception.messagecatalog.MessageCatalogStrategy;
-import com.doo.ubico.crosscutting.exception.messagecatalog.data.CodigoMensaje;
 import com.doo.ubico.data.dao.AulaDAO;
 import com.doo.ubico.data.dao.BloqueDAO;
 import com.doo.ubico.data.dao.TipoAulaDAO;
-import com.doo.ubico.data.dao.factory.enums.Factory;
 
 import com.doo.ubico.data.dao.factory.sql.azuresql.AzureSqlDAOFactory;
-import com.doo.ubico.data.dao.sql.*;
 import com.doo.ubico.data.dao.sql.azuresql.AulaAzureSqlDAO;
+import com.doo.ubico.data.dao.sql.azuresql.BloqueAzureSqlDAO;
+import com.doo.ubico.data.dao.sql.azuresql.TipoAulaAzureSqlDAO;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
 
-public abstract class DAOFactory {
 
-    public static DAOFactory getFactory() {
+
+
+public interface DAOFactory {
+
+    static DAOFactory getFactory() {
         return new AzureSqlDAOFactory();
     }
 
+    void cerrarConexion();
 
-    protected abstract void obtenerConexion();
+    void iniciarTransaccion();
 
-    public abstract void iniciarTransaccion();
+    void confirmarTransaccion();
 
-    public abstract void confirmarTransaccion();
+    void cancelarTransaccion();
 
-    public abstract void cancelarTransaccion();
+     AulaDAO getAulaDAO();
 
-    public abstract void cerrarConexion();
+     BloqueDAO getBloqueDAO();
 
-    public abstract AulaDAO getAulaDAO();
-    public  abstract TipoAulaDAO getTipoAulaDAO();
-    public abstract BloqueDAO getBloqueDAO();
-
-
-
+     TipoAulaDAO getTipoAulaDAO();
 }
