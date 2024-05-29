@@ -13,10 +13,9 @@ import com.doo.ubico.dto.AulaDTO;
 @RequestMapping("/api/V1/aulas")
 public class AulaController {
 	
+	
 	@GetMapping
 	public List<AulaDTO> listar() {
 		return null;
-		
-		
 	}
 }

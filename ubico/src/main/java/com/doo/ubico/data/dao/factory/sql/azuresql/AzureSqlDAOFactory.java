@@ -12,6 +12,7 @@ import com.doo.ubico.data.dao.sql.azuresql.AulaAzureSqlDAO;
 import com.doo.ubico.data.dao.sql.azuresql.BloqueAzureSqlDAO;
 import com.doo.ubico.data.dao.sql.azuresql.TipoAulaAzureSqlDAO;
 import com.doo.ubico.entity.AulaEntity;
+import com.doo.ubico.entity.TipoAulaEntity;
 import com.doo.ubico.data.dao.factory.enums.Factory;
 
 import java.sql.Connection;
@@ -87,14 +88,14 @@ public final class AzureSqlDAOFactory extends DAOFactory {
             System.out.println("Iniciando transacción...");
             factory.iniciarTransaccion();
 
-            System.out.println("Creando país aleatoriamente");
-            factory.getAulaDAO().crear(AulaEntity.build(0, "203-" + UUID.randomUUID().toString(), "M", "Común", 12));
+            System.out.println("Creando Aula aleatoriamente");
+            factory.getAulaDAO().crear(AulaEntity.build(0, "203-" , 12, null, null));
 
-            System.out.println("Consultamos países: ");
+            System.out.println("Consultamos Aula: ");
             var resultados = factory.getAulaDAO().consultar(AulaEntity.build(0));
 
             for (AulaEntity AulaEntity : resultados) {
-                System.out.println("id: " + AulaEntity.getId() + ", nombre: " + AulaEntity.getNombre() + ", Bloque: " + AulaEntity.getBloque() + ", TipoAula: " + AulaEntity.getTipoAula());
+                System.out.println("id: " + AulaEntity.getId() + ", nombre: " + AulaEntity.getNombre() + ", capacidad: " + AulaEntity.getCapacidad() +  ", Bloque: " + AulaEntity.getBloque() + ", TipoAula: " + AulaEntity.getTipoAula());
             }
 
             System.out.println("Confirmando transacción...");
