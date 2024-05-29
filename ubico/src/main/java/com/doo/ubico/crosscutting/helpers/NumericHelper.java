@@ -7,5 +7,15 @@ public final class NumericHelper {
 	private NumericHelper() {
 		super();
 	}
+	
+	public static final int convertToInt(final String value) {
+		
+		try {
+			return Integer.valueOf(value);
+		}catch (Exception exception) {
+			
+			return 0;
+		}
+	}
 
 }

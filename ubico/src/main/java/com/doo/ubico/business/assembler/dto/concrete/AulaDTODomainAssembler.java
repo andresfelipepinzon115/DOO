@@ -3,6 +3,9 @@ package com.doo.ubico.business.assembler.dto.concrete;
 import com.doo.ubico.dto.AulaDTO;
 import com.doo.ubico.dto.BloqueDTO;
 import com.doo.ubico.dto.TipoAulaDTO;
+
+import java.util.List;
+
 import com.doo.ubico.business.assembler.dto.DTODomainAssembler;
 import com.doo.ubico.business.domain.AulaDomain;
 import com.doo.ubico.business.domain.BloqueDomain;
@@ -39,6 +42,11 @@ public class AulaDTODomainAssembler implements DTODomainAssembler <AulaDomain, A
 		var TipoAulaDTO = TipoAulaAssembler.ensamblarDTO(AulaDomainTmp.getTipoAula());
 		var BloqueDTO = BloqueAssembler.ensamblarDTO(AulaDomainTmp.getBloque());
 		return AulaDTO.build().setId(AulaDomainTmp.getId()).setNombre(AulaDomainTmp.getNombre()).setCapacidad(AulaDomainTmp.getCapacidad()).setTipoAula(TipoAulaDTO).setBloque(BloqueDTO);
+	}
+	@Override
+	public List<AulaDTO> ensamblarListaDTO(List<AulaDomain> listDominios) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
