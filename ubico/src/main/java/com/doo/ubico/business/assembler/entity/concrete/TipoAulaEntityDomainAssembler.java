@@ -5,9 +5,16 @@ import com.doo.ubico.business.domain.TipoAulaDomain;
 import com.doo.ubico.crosscutting.helpers.ObjectHelper;
 import com.doo.ubico.entity.TipoAulaEntity;
 
-public class TipoAulaEntityDomainAssembler implements EntityDomainAssembler<TipoAulaDomain, TipoAulaEntity>{
+import java.util.List;
 
-	public static final EntityDomainAssembler<TipoAulaDomain, TipoAulaEntity> instancia = new TipoAulaEntityDomainAssembler();
+public abstract class TipoAulaEntityDomainAssembler implements EntityDomainAssembler<TipoAulaDomain, TipoAulaEntity>{
+
+	public static final EntityDomainAssembler<TipoAulaDomain, TipoAulaEntity> instancia = new TipoAulaEntityDomainAssembler() {
+		@Override
+		public List<TipoAulaDomain> toDomainCollection(List<TipoAulaEntity> entities) {
+			return List.of();
+		}
+	};
 	private TipoAulaEntityDomainAssembler() {
 		super();
 	}

@@ -5,6 +5,8 @@ import com.doo.ubico.business.domain.BloqueDomain;
 import com.doo.ubico.crosscutting.helpers.ObjectHelper;
 import com.doo.ubico.entity.BloqueEntity;
 
+import java.util.List;
+
 public class BloqueEntityDomainAssembler implements EntityDomainAssembler<BloqueDomain, BloqueEntity>{
 
 	public static final EntityDomainAssembler<BloqueDomain, BloqueEntity> instancia = new BloqueEntityDomainAssembler();
@@ -26,6 +28,11 @@ public class BloqueEntityDomainAssembler implements EntityDomainAssembler<Bloque
 	public final BloqueEntity ensamblarEntidad(final BloqueDomain dominio) {
 		var bloqueDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, BloqueDomain.crear());
 		return BloqueEntity.build(bloqueDomainTmp.getId(), bloqueDomainTmp.getNombre());
+	}
+
+	@Override
+	public List<BloqueDomain> toDomainCollection(List<BloqueEntity> entities) {
+		return List.of();
 	}
 
 }

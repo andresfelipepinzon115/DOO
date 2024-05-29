@@ -9,6 +9,9 @@ import com.doo.ubico.entity.AulaEntity;
 import com.doo.ubico.entity.BloqueEntity;
 import com.doo.ubico.entity.TipoAulaEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AulaEntityDomainAssembler implements EntityDomainAssembler<AulaDomain, AulaEntity>{
 	
 	private static final EntityDomainAssembler<AulaDomain, AulaEntity> instancia = new AulaEntityDomainAssembler();
@@ -32,12 +35,16 @@ public class AulaEntityDomainAssembler implements EntityDomainAssembler<AulaDoma
 	}
 
 	@Override
-	public final AulaEntity ensamblarEntidad(final AulaDomain dominio) {
+	public  AulaEntity ensamblarEntidad(final AulaDomain dominio) {
 		var AulaDomainTmp = ObjectHelper.getObjectHelper().getDefault(dominio, AulaDomain.crear());
 		var tipoAulaEntity = TipoAulaAssembler.ensamblarEntidad(AulaDomainTmp.getTipoAula());
 		var bloqueEntity = BloqueAssembler.ensamblarEntidad(AulaDomainTmp.getBloque());
 		return AulaEntity.build(AulaDomainTmp.getId(), AulaDomainTmp.getNombre(), AulaDomainTmp.getCapacidad(), tipoAulaEntity, bloqueEntity);
 		
+	}
+	public List<AulaDomain> toDomainCollection( final List<AulaEntity> entities) {
+		var entityCollectionTmp = ObjectHelper.getObjectHelper().getDefault(entities, new ArrayList<AulaEntity>());
+		return entityCollectionTmp.stream().map(this::ensamblarDominio).toList();
 	}
 
 }

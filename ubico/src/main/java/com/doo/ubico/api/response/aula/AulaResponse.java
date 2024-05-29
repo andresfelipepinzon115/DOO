@@ -10,6 +10,11 @@ import com.doo.ubico.dto.AulaDTO;
 
 public class AulaResponse extends Response<AulaDTO> {
 
+    public AulaResponse(){
+        setMensajes(new ArrayList<String>());
+        setDatos(new ArrayList<AulaDTO>());
+    }
+
 
 
 }

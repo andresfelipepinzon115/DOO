@@ -1,9 +1,7 @@
 package com.doo.ubico.entity;
 import com.doo.ubico.crosscutting.helpers.NumericHelper;
 import com.doo.ubico.crosscutting.helpers.TextHelper;
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 public final  class BloqueEntity {
     private  int id;

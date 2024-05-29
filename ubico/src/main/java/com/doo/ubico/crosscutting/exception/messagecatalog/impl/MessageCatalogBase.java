@@ -3,6 +3,7 @@ package com.doo.ubico.crosscutting.exception.messagecatalog.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.doo.ubico.crosscutting.exception.UbicoException;
 import com.doo.ubico.crosscutting.exception.custom.CrosscuttingUbicoException;
 import com.doo.ubico.crosscutting.exception.messagecatalog.MessageCatalog;
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.CodigoMensaje;
@@ -76,7 +77,7 @@ public final class MessageCatalogBase implements MessageCatalog {
 			var mensajeUsuario = obtenerContenidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00001);
 
-			throw new CrosscuttingTiendaChepitoException(mensajeTecnico, mensajeUsuario);
+			throw new CrosscuttingUbicoException(mensajeTecnico, mensajeUsuario);
 		}
 
 		if (!codigo.isBase()) {

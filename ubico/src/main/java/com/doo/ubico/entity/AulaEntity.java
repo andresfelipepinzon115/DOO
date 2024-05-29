@@ -31,9 +31,10 @@ public final class AulaEntity {
 		{
 			setId(id);
 			setNombre(nombre);
+			setCapacidad(capacidad);
 			setBloque(bloque);
 			setTipoAula(tipoAula);
-			setCapacidad(capacidad);
+
 		}
 	}
 

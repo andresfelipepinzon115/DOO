@@ -12,7 +12,7 @@ import com.doo.ubico.dto.AulaDTO;
 
 public class RegistrarAulaFachadaImpl implements RegistrarAulaFachada{
 	
-	private DAOFactory factory;
+	private  final DAOFactory factory;
 	
 	public RegistrarAulaFachadaImpl() {
 		factory= DAOFactory.getFactory(Factory.AZURE_SQL);
