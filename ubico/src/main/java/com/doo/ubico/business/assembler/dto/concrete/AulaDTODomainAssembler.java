@@ -16,7 +16,7 @@ public class AulaDTODomainAssembler implements DTODomainAssembler <AulaDomain, A
 
 	
 	private static final DTODomainAssembler< BloqueDomain, BloqueDTO> BloqueAssembler = BloqueDTODomainAssembler.obtenerInstancia(); 
-	private static final DTODomainAssembler<TipoAulaDomain, TipoAulaDTO> TipoAulaAssembler = TipoAulaDTODomainAssembler.obtenerInstancia(); 
+	private static final DTODomainAssembler<TipoAulaDomain, TipoAulaDTO> TipoAulaAssembler = (DTODomainAssembler<TipoAulaDomain, TipoAulaDTO>) TipoAulaDTODomainAssembler.getInstance();
 	private AulaDTODomainAssembler() {
 		super();
 	}
@@ -43,10 +43,17 @@ public class AulaDTODomainAssembler implements DTODomainAssembler <AulaDomain, A
 		var BloqueDTO = BloqueAssembler.ensamblarDTO(AulaDomainTmp.getBloque());
 		return AulaDTO.build().setId(AulaDomainTmp.getId()).setNombre(AulaDomainTmp.getNombre()).setCapacidad(AulaDomainTmp.getCapacidad()).setTipoAula(TipoAulaDTO).setBloque(BloqueDTO);
 	}
+
 	@Override
-	public List<AulaDTO> ensamblarListaDTO(List<AulaDomain> listDominios) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<AulaDomain> toDomainCollection(List<AulaDTO> dtoCollection) {
+		return List.of();
 	}
+
+	@Override
+	public List<AulaDTO> toDTOCollection(List<AulaDomain> domainCollection) {
+		return List.of();
+	}
+
+
 
 }

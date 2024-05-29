@@ -14,6 +14,8 @@ import com.doo.ubico.data.dao.TipoAulaDAO;
 import com.doo.ubico.data.dao.sql.SqlConnection;
 import com.doo.ubico.entity.TipoAulaEntity;
 
+import static java.sql.DriverManager.getConnection;
+
 public final class TipoAulaAzureSqlDAO extends SqlConnection implements TipoAulaDAO {
 
     public TipoAulaAzureSqlDAO(final Connection connection) {
@@ -50,7 +52,7 @@ public final class TipoAulaAzureSqlDAO extends SqlConnection implements TipoAula
         sentenciaSql.append("FROM TipoAula ");
         sentenciaSql.append("ORDER BY Nombre ASC");
 
-        try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {
+        try (final PreparedStatement sentenciaPreparada = getConexion().prepareStatement(sentenciaSql.toString())) {
             try (final ResultSet resultado = sentenciaPreparada.executeQuery()) {
                 List<TipoAulaEntity> TipoAula = new ArrayList<>();
                 while (resultado.next()) {
@@ -78,7 +80,7 @@ public final class TipoAulaAzureSqlDAO extends SqlConnection implements TipoAula
         sentenciaSql.append("INSERT INTO TipoAula(Nombre) ");
         sentenciaSql.append("VALUES ('Aula Común'), ('Salon de Informatica'), ('Laboratorio')");
 
-        try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {
+        try (final PreparedStatement sentenciaPreparada = getConexion().prepareStatement(sentenciaSql.toString())) {
             sentenciaPreparada.setString(1, entidad.getNombre());
             sentenciaPreparada.executeUpdate();
         } catch (final SQLException exception) {
@@ -98,7 +100,7 @@ public final class TipoAulaAzureSqlDAO extends SqlConnection implements TipoAula
         sentenciaSql.append("DELETE FROM TipoAula ");
         sentenciaSql.append("WHERE Id = ?");
 
-        try (final PreparedStatement sentenciaPreparada = getConnection().prepareStatement(sentenciaSql.toString())) {
+        try (final PreparedStatement sentenciaPreparada = getConexion().prepareStatement(sentenciaSql.toString())) {
             sentenciaPreparada.setInt(1, id);
             sentenciaPreparada.executeUpdate();
         } catch (final SQLException exception) {

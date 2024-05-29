@@ -11,35 +11,25 @@ import com.doo.ubico.crosscutting.exception.custom.DataUbicoException;
 
 public class SqlConnection {
 
-    private Connection connection;
+    private Connection conexion;
 
-    protected SqlConnection(final Connection connection) {
-        setConnection(connection);
+    protected SqlConnection(final Connection conexion) {
+        setConexion(conexion);
     }
 
-    private void setConnection(final Connection connection) {
-        if (SQLHelper.isOpen(connection)) {
-            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-            var mensajeTecnico = "No es posible crear el DAO deseado, dado que la conexion SQL esta cerrada";
-            throw new DataUbicoException(mensajeTecnico, mensajeUsuario);
+    protected SqlConnection() {
+        super();
+    }
+    protected final Connection getConexion() {
+        return conexion;
+    }
+
+    protected final void setConexion(final Connection conexion) {
+        if (!SQLHelper.isOpen(conexion)) {
+            var mensajeUsuario=MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
+            var mensajeTecnico="No es posible crear el DAO deseado con una conexión cerrada";
+            throw new DataUbicoException(mensajeTecnico,mensajeUsuario);
         }
-        this.connection = connection;
+        this.conexion = conexion;
     }
-
-    protected final Connection getConnection() {
-        return connection;
-
-    }
-
-//        protected SqlConnection(final Connection connection) {
-//            if (connection == null) {
-//                throw new NullPointerException("The connection is null");
-//            }
-//            this.connection = connection;
-//        }
-//
-//        protected Connection getConnection() {
-//            return connection;
-//        }
-
 }
