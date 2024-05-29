@@ -40,7 +40,7 @@ export function HomeComponent() {
     event.preventDefault();
     if (isFormValid()) {
       try {
-        const aula = { block, type, capacity, name };
+        const aula = { block, type, capacity, name};
         const response = await axios.post('http://localhost:8080/api/aulas', aula); // Ajusta la URL si es necesario
         console.log('Aula agregada', response.data);
         setErrors({});
