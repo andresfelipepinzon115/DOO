@@ -9,7 +9,7 @@ import com.doo.ubico.crosscutting.exception.messagecatalog.data.CodigoMensaje;
 import com.doo.ubico.crosscutting.exception.messagecatalog.data.Mensaje;
 import com.doo.ubico.crosscutting.helpers.ObjectHelper;
 
-import co.edu.uco.tiendachepito.crosscutting.exceptions.custom.CrosscuttingTiendaChepitoException;
+
 
 public final class MessageCatalogBase implements MessageCatalog {
 

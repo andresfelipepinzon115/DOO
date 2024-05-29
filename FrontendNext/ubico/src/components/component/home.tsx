@@ -1,10 +1,10 @@
 "use client"; // Asegura que este archivo se interprete como un componente del cliente
 
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent, Dispatch, SetStateAction } from 'react';
 import axios from 'axios';
-import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select";
+import { Select, SelectTrigger, SelectItem, SelectContent, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import Button from "@/components/ui/button"; // Asegúrate de importar correctamente el botón
+import { Button } from "@/components/ui/button"; // Importación nombrada
 import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card";
 
 export function HomeComponent() {
@@ -84,8 +84,8 @@ export function HomeComponent() {
             <label className="text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="block">
               Bloque
             </label>
-            <Select id="block" onValueChange={setBlock}>
-              <SelectTrigger>
+            <Select onValueChange={setBlock}>
+              <SelectTrigger id="block">
                 <SelectValue placeholder="Selecciona un bloque" />
               </SelectTrigger>
               <SelectContent>
@@ -100,8 +100,8 @@ export function HomeComponent() {
             <label className="text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="type">
               Tipo de Aula
             </label>
-            <Select id="type" onValueChange={setType}>
-              <SelectTrigger>
+            <Select onValueChange={setType}>
+              <SelectTrigger id="type">
                 <SelectValue placeholder="Selecciona un tipo de aula" />
               </SelectTrigger>
               <SelectContent>
